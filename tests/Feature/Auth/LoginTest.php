@@ -2,8 +2,8 @@
 
 namespace Tests\Feature\Auth;
 
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class LoginTest extends TestCase
 {
@@ -31,9 +31,9 @@ class LoginTest extends TestCase
                 'email',
                 'email_verified_at',
                 'created_at',
-                'updated_at'
+                'updated_at',
             ],
-            'token'
+            'token',
         ]);
     }
 

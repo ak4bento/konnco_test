@@ -4,17 +4,15 @@ namespace Tests\Feature;
 
 use App\Jobs\ProcessTransactionJob;
 use App\Models\Transaction;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Log;
-use PHPUnit\Framework\Attributes\Test;
 use Illuminate\Support\Facades\Queue;
+use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Tests\Traits\AuthCase;
 
 class QueueTest extends TestCase
 {
     use AuthCase;
-    
+
     #[Test]
     public function dispatches_a_job_to_process_transaction()
     {
@@ -40,11 +38,11 @@ class QueueTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                    'status',
-                    'message',
-                    'description'
-                ]);
+            ->assertJsonStructure([
+                'status',
+                'message',
+                'description',
+            ]);
 
         $transaction = Transaction::find($responseNewTransaction->json('data.id'));
 

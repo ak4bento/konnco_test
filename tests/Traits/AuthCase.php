@@ -7,6 +7,7 @@ use Error;
 trait AuthCase
 {
     private const EMAIL = 'admin@akil.co.id';
+
     private const PASSWORD = 'Ve5JbvSCBXBkdni';
 
     //return json from authentication

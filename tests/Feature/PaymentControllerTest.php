@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\WithFaker;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 use Tests\Traits\AuthCase;
@@ -10,7 +9,7 @@ use Tests\Traits\AuthCase;
 class PaymentControllerTest extends TestCase
 {
     use AuthCase;
-    
+
     #[Test]
     public function can_create_a_transaction()
     {
@@ -25,23 +24,23 @@ class PaymentControllerTest extends TestCase
         ]);
 
         $response->assertStatus(201)
-                 ->assertJsonStructure([
-                    'data' => [
+            ->assertJsonStructure([
+                'data' => [
+                    'id',
+                    'user' => [
                         'id',
-                        'user' => [
-                            'id',
-                            'name',
-                            'email',
-                        ],
-                        'amount',
-                        'status',
-                        'created_at',
-                        'updated_at'
+                        'name',
+                        'email',
                     ],
+                    'amount',
                     'status',
-                    'message',
-                    'description'
-                ]);
+                    'created_at',
+                    'updated_at',
+                ],
+                'status',
+                'message',
+                'description',
+            ]);
 
         $this->assertDatabaseHas('transactions', [
             'user_id' => $user['id'],
@@ -96,11 +95,11 @@ class PaymentControllerTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                    'status',
-                    'message',
-                    'description'
-                ]);
+            ->assertJsonStructure([
+                'status',
+                'message',
+                'description',
+            ]);
 
         $this->assertDatabaseHas('transactions', [
             'id' => $responseNewTransaction['data']['id'],
@@ -141,44 +140,44 @@ class PaymentControllerTest extends TestCase
         ])->getJson('/api/user/transactions');
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                    'data' => [
-                        '*' => [
+            ->assertJsonStructure([
+                'data' => [
+                    '*' => [
+                        'id',
+                        'user' => [
                             'id',
-                            'user' => [
-                                'id',
-                                'name',
-                                'email'
-                            ],
-                            'amount',
-                            'status',
-                            'created_at',
-                            'updated_at'
-                        ]
-                    ],
-                    'links' => [
-                        'first',
-                        'last',
-                        'prev',
-                        'next'
-                    ],
-                    'meta' => [
-                        'current_page',
-                        'from',
-                        'last_page',
-                        'links' => [
-                            '*' => [
-                                'url',
-                                'label',
-                                'active'
-                            ]
+                            'name',
+                            'email',
                         ],
-                        'path',
-                        'per_page',
-                        'to',
-                        'total'
-                    ]
-                ]);
+                        'amount',
+                        'status',
+                        'created_at',
+                        'updated_at',
+                    ],
+                ],
+                'links' => [
+                    'first',
+                    'last',
+                    'prev',
+                    'next',
+                ],
+                'meta' => [
+                    'current_page',
+                    'from',
+                    'last_page',
+                    'links' => [
+                        '*' => [
+                            'url',
+                            'label',
+                            'active',
+                        ],
+                    ],
+                    'path',
+                    'per_page',
+                    'to',
+                    'total',
+                ],
+            ]);
     }
 
     #[Test]
@@ -202,25 +201,25 @@ class PaymentControllerTest extends TestCase
         ])->getJson('/api/user/transactions/summary');
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                    'user' => [
-                        'id',
-                        'name',
-                        'email',
-                        'email_verified_at',
-                        'created_at',
-                        'updated_at'
-                    ],
-                    'data' => [
-                        'total_transactions',
-                        'total_amount_completed',
-                        'total_amount_pending',
-                        'total_amount_failed'
-                    ],
-                    'status',
-                    'message',
-                    'description'
-                ]);
+            ->assertJsonStructure([
+                'user' => [
+                    'id',
+                    'name',
+                    'email',
+                    'email_verified_at',
+                    'created_at',
+                    'updated_at',
+                ],
+                'data' => [
+                    'total_transactions',
+                    'total_amount_completed',
+                    'total_amount_pending',
+                    'total_amount_failed',
+                ],
+                'status',
+                'message',
+                'description',
+            ]);
     }
 
     #[Test]
@@ -244,40 +243,40 @@ class PaymentControllerTest extends TestCase
         ])->getJson('/api/user/transactions/all-summary');
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                    'total_transactions',
-                    'average_amount',
-                    'highest_transaction' => [
-                        'id',
-                        'user_id',
-                        'amount',
-                        'status',
-                        'created_at',
-                        'updated_at'
-                    ],
-                    'lowest_transaction' => [
-                        'id',
-                        'user_id',
-                        'amount',
-                        'status',
-                        'created_at',
-                        'updated_at'
-                    ],
-                    'longest_name_transaction' => [
-                        'id',
-                        'user_id',
-                        'amount',
-                        'status',
-                        'created_at',
-                        'updated_at',
-                        'user_name'
-                    ],
-                    'status_distribution' => [
-                        'pending',
-                        'completed',
-                        'failed'
-                    ]
-                ]);
+            ->assertJsonStructure([
+                'total_transactions',
+                'average_amount',
+                'highest_transaction' => [
+                    'id',
+                    'user_id',
+                    'amount',
+                    'status',
+                    'created_at',
+                    'updated_at',
+                ],
+                'lowest_transaction' => [
+                    'id',
+                    'user_id',
+                    'amount',
+                    'status',
+                    'created_at',
+                    'updated_at',
+                ],
+                'longest_name_transaction' => [
+                    'id',
+                    'user_id',
+                    'amount',
+                    'status',
+                    'created_at',
+                    'updated_at',
+                    'user_name',
+                ],
+                'status_distribution' => [
+                    'pending',
+                    'completed',
+                    'failed',
+                ],
+            ]);
     }
 
     #[Test]
