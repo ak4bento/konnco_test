@@ -12,9 +12,9 @@ class ProcessTransactionJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $transaction;
+    public $transaction;
 
-    protected $status;
+    public $status;
 
     /**
      * Create a new job instance.

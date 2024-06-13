@@ -46,6 +46,8 @@ class QueueTest extends TestCase
 
         $transaction = Transaction::find($responseNewTransaction->json('data.id'));
 
-        Queue::assertPushed(ProcessTransactionJob::class);
+        Queue::assertPushed(function (ProcessTransactionJob $job) use ($transaction) {
+            return $job->transaction->id === $transaction->id;
+        });
     }
 }
